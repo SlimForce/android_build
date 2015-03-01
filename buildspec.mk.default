@@ -28,11 +28,11 @@ ifndef TARGET_PRODUCT
 endif
 
 # Choose a variant to build.  If you don't pick one, the default is eng.
-# User is what we ship.  Poweruser is that, with a few flags turned on
+# User is what we ship.  Userdebug is that, with a few flags turned on
 # for debugging.  Eng has lots of extra tools for development.
 ifndef TARGET_BUILD_VARIANT
 #TARGET_BUILD_VARIANT:=user
-#TARGET_BUILD_VARIANT:=poweruser
+#TARGET_BUILD_VARIANT:=userdebug
 #TARGET_BUILD_VARIANT:=eng
 endif
 

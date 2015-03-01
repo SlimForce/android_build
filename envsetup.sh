@@ -2,7 +2,7 @@ function hmm() {
 cat <<EOF
 Invoke ". build/envsetup.sh" from your shell to add the following functions to your environment:
 - lunch:   lunch <product_name>-<build_variant>
-- tapas:   tapas [<App1> <App2> ...] [arm|x86|mips|armv5|arm64|x86_64|mips64] [eng|poweruser|user]
+- tapas:   tapas [<App1> <App2> ...] [arm|x86|mips|armv5|arm64|x86_64|mips64] [eng|userdebug|user]
 - croot:   Changes directory to the top of the tree.
 - cout:    Changes directory to out.
 - m:       Makes from the top of the tree.
@@ -85,7 +85,7 @@ function check_product()
     # hide successful answers, but allow the errors to show
 }
 
-VARIANT_CHOICES=(user poweruser eng)
+VARIANT_CHOICES=(user userdebug eng)
 
 # check to see if the supplied variant is valid
 function check_variant()
@@ -675,8 +675,8 @@ complete -F _lunch lunch 2>/dev/null
 function tapas()
 {
     local arch="$(echo $* | xargs -n 1 echo | \grep -E '^(arm|x86|mips|armv5|arm64|x86_64|mips64)$' | xargs)"
-    local variant="$(echo $* | xargs -n 1 echo | \grep -E '^(user|poweruser|eng)$' | xargs)"
-    local apps="$(echo $* | xargs -n 1 echo | \grep -E -v '^(user|poweruser|eng|arm|x86|mips|armv5|arm64|x86_64|mips64)$' | xargs)"
+    local variant="$(echo $* | xargs -n 1 echo | \grep -E '^(user|userdebug|eng)$' | xargs)"
+    local apps="$(echo $* | xargs -n 1 echo | \grep -E -v '^(user|userdebug|eng|arm|x86|mips|armv5|arm64|x86_64|mips64)$' | xargs)"
 
     if [ $(echo $arch | wc -w) -gt 1 ]; then
         echo "tapas: Error: Multiple build archs supplied: $arch"

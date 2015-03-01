@@ -17,12 +17,12 @@
 #
 # Source this file into your environment.  Then:
 #
-#    $ golden_builds sdk-sdk generic-eng generic-poweruser dream-eng
+#    $ golden_builds sdk-sdk generic-eng generic-userdebug dream-eng
 # 
 # will build a set of combos.  This might take a while.  Then you can
 # go make changes, and run:
 #
-#    $ check_builds sdk-sdk generic-eng generic-poweruser dream-eng
+#    $ check_builds sdk-sdk generic-eng generic-userdebug dream-eng
 #
 # Go get dinner, and when you get back, there will be a file
 # test-builds/sizes.html that has a pretty chart of which files are
