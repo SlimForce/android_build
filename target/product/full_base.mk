@@ -24,7 +24,6 @@ PRODUCT_PACKAGES := \
     WAPPushManager
 
 PRODUCT_PACKAGES += \
-    PhaseBeam \
     PhotoTable
 
 # Additional settings used in all AOSP builds

@@ -19,15 +19,12 @@ PRODUCT_PROPERTY_OVERRIDES :=
 PRODUCT_PACKAGES := \
 	ApiDemos \
 	CustomLocale \
-	Development \
-	DevelopmentSettings \
 	Dialer \
 	EmulatorSmokeTests \
 	Fallback \
 	Gallery \
 	GestureBuilder \
 	librs_jni \
-	LiveWallpapersPicker \
 	rild \
 	SdkSetup \
 	SmokeTest \
