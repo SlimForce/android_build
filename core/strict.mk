@@ -33,7 +33,6 @@ LOCAL_DISABLE_STRICT := \
 	libpdfium \
 	bluetooth.default \
 	logd \
-	mdnsd \
 	net_net_gyp \
 	libstagefright_webm \
 	libaudioflinger \

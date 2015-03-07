@@ -138,7 +138,6 @@ LOCAL_DISABLE_NEST := \
 	toolbox \
 	libart-compiler \
 	hostapd \
-	mdnsd \
 	libsoftkeymaster \
 	libaudioflinger \
 	libstagefright_avc_common \
