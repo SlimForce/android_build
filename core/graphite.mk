@@ -35,7 +35,8 @@ LOCAL_DISABLE_GRAPHITE := \
 	libswresample \
 	libavcodec \
 	libswscale \
-	libwebrtc_spl
+	libwebrtc_spl \
+	libFraunhoferAAC
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE), $(LOCAL_MODULE))))
 ifdef LOCAL_CONLYFLAGS
