@@ -67,33 +67,19 @@ $(combo_2nd_arch_prefix)TARGET_STRIP := $($(combo_2nd_arch_prefix)TARGET_TOOLS_P
 
 $(combo_2nd_arch_prefix)TARGET_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 
-ifeq ($(USE_O3_OPTIMIZATIONS),true)
-$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS := -O3 -DNDEBUG -pipe \
-                                             -fomit-frame-pointer \
-                                             -funswitch-loops \
-                                             -fno-tree-vectorize \
-                                             -fno-inline-functions \
-                                             -fivopts \
-                                             -ffunction-sections \
-                                             -fdata-sections \
-                                             -frename-registers \
-                                             -ftracer
-$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb -Os -DNDEBUG -pipe \
-                                               -fomit-frame-pointer \
-                                               -fno-tree-vectorize \
-                                               -fno-inline-functions \
-                                               -fno-unswitch-loops \
-                                               -fivopts \
-                                               -ffunction-sections \
-                                               -fdata-sections \
-                                               -ftracer \
-                                               -Wno-clobbered \
-                                               -Wno-strict-overflow
-else
-$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS := -O2 -fomit-frame-pointer -funswitch-loops
-$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb -Os -fomit-frame-pointer
-endif
+# ArchiDroid
+include $(BUILD_SYSTEM)/archidroid.mk
 
+$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=    $(ARCHIDROID_GCC_CFLAGS_ARM) \
+                        -fomit-frame-pointer \
+                        -fstrict-aliasing    \
+                        -funswitch-loops
+
+# Modules can choose to compile some source as thumb.
+$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS :=  -mthumb \
+                        $(ARCHIDROID_GCC_CFLAGS_THUMB) \
+                        -fomit-frame-pointer \
+                        -fno-strict-aliasing
 ifeq ($(SUPPRES_UNUSED_WARNING),true)
 $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS += -Wno-unused-parameter \
                                              -Wno-unused-value \
@@ -106,6 +92,10 @@ $(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS += -Wno-unused-parameter \
                                                -Wno-unused-but-set-variable \
                                                -Wno-maybe-uninitialized
 endif
+
+$(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += $(ARCHIDROID_GCC_CFLAGS)
+$(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += $(ARCHIDROID_GCC_CPPFLAGS)
+$(combo_2nd_arch_prefix)TARGET_GLOBAL_LDFLAGS += $(ARCHIDROID_GCC_LDFLAGS)
 
 # Set FORCE_ARM_DEBUGGING to "true" in your buildspec.mk
 # or in your environment to force a full arm build, even for
@@ -192,6 +182,14 @@ else
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden
 $(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -DNDEBUG -g -fgcse-after-reload -frerun-cse-after-loop -frename-registers
 endif
+
+# More flags/options can be added here
+$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := \
+                        -DNDEBUG \
+                        -Wstrict-aliasing=2 \
+                        -fgcse-after-reload \
+                        -frerun-cse-after-loop \
+                        -frename-registers
 
 ifeq ($(SUPPRES_UNUSED_WARNING),true)
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += -Wno-unused-parameter \
