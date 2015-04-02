@@ -124,6 +124,13 @@ include $(BUILD_SYSTEM)/krait.mk
 endif
 endif
 
+ifeq ($(strip $(USE_O3_OPTIMIZATIONS)),true)
+ifndef LOCAL_IS_HOST_MODULE
+  include $(BUILD_SYSTEM)/O3.mk
+endif
+endif
+
+
 ifeq ($(ENABLE_GCCONLY),true)
 ifndef LOCAL_IS_HOST_MODULE
 ifeq ($(LOCAL_CLANG),)

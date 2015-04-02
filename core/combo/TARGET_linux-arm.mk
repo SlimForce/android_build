@@ -198,6 +198,7 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += -Wno-unused-parameter \
                                                   -Wno-unused-value \
                                                   -Wno-unused-function \
                                                   -Wno-unused-but-set-variable \
+                                                  -Wno-unused-private-field \
                                                   -Wno-maybe-uninitialized
 $(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS += -Wno-unused-parameter \
                                                  -Wno-unused-value \
