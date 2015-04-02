@@ -70,16 +70,34 @@ $(combo_2nd_arch_prefix)TARGET_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 # ArchiDroid
 include $(BUILD_SYSTEM)/archidroid.mk
 
-$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=    $(ARCHIDROID_GCC_CFLAGS_ARM) \
-                        -fomit-frame-pointer \
-                        -fstrict-aliasing    \
-                        -funswitch-loops
+ifeq ($(USE_O3_OPTIMIZATIONS),true)
+$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=  $(ARCHIDROID_GCC_CFLAGS_ARM) \
+						-DNDEBUG -pipe \
+						-fomit-frame-pointer \
+						-funswitch-loops \
+						-fivopts \
+						-ffunction-sections \
+						-fdata-sections \
+						-frename-registers \
+						-ftracer
 
 # Modules can choose to compile some source as thumb.
 $(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS :=  -mthumb \
                         $(ARCHIDROID_GCC_CFLAGS_THUMB) \
-                        -fomit-frame-pointer \
-                        -fno-strict-aliasing
+						-DNDEBUG -pipe \
+						-fomit-frame-pointer \
+						-fno-unswitch-loops \
+						-fivopts \
+						-ffunction-sections \
+						-fdata-sections \
+						-ftracer \
+						-Wno-clobbered \
+						-Wno-strict-overflow
+else
+$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS := -O2 -fomit-frame-pointer -funswitch-loops
+$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb -Os -fomit-frame-pointer
+endif
+
 ifeq ($(SUPPRES_UNUSED_WARNING),true)
 $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS += -Wno-unused-parameter \
                                              -Wno-unused-value \
@@ -114,7 +132,7 @@ endif
 android_config_h := $(call select-android-config-h,linux-arm)
 
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += \
-                        -pipe \
+			-pipe \
 			-msoft-float \
 			-ffunction-sections \
 			-fdata-sections \
@@ -169,7 +187,7 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden \
                                                   -funswitch-loops \
                                                   -fomit-frame-pointer \
                                                   -ftracer
-$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -O3 -DNDEBUG -pipe -g \
+$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -O3 -DNDEBUG -pipe \
                                                  -frerun-cse-after-loop \
                                                  -frename-registers \
                                                  -fivopts \
@@ -185,11 +203,8 @@ endif
 
 # More flags/options can be added here
 $(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := \
-                        -DNDEBUG \
                         -Wstrict-aliasing=2 \
-                        -fgcse-after-reload \
-                        -frerun-cse-after-loop \
-                        -frename-registers
+                        -fgcse-after-reload 
 
 ifeq ($(SUPPRES_UNUSED_WARNING),true)
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += -Wno-unused-parameter \
