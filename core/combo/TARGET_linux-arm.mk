@@ -72,7 +72,7 @@ include $(BUILD_SYSTEM)/archidroid.mk
 
 ifeq ($(USE_O3_OPTIMIZATIONS),true)
 $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=  $(ARCHIDROID_GCC_CFLAGS_ARM) \
-						-DNDEBUG -pipe \
+						-DNDEBUG  \
 						-fomit-frame-pointer \
 						-funswitch-loops \
 						-fivopts \
@@ -84,7 +84,7 @@ $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=  $(ARCHIDROID_GCC_CFLAGS_ARM) \
 # Modules can choose to compile some source as thumb.
 $(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS :=  -mthumb \
                         $(ARCHIDROID_GCC_CFLAGS_THUMB) \
-						-DNDEBUG -pipe \
+						-DNDEBUG \
 						-fomit-frame-pointer \
 						-fno-unswitch-loops \
 						-fivopts \
@@ -132,7 +132,6 @@ endif
 android_config_h := $(call select-android-config-h,linux-arm)
 
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += \
-			-pipe \
 			-msoft-float \
 			-ffunction-sections \
 			-fdata-sections \
@@ -180,14 +179,14 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += -mthumb-interwork
 
 ifeq ($(USE_O3_OPTIMIZATIONS),true)
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden \
-                                                  -O3 -DNDEBUG -pipe \
+                                                  -O3 -DNDEBUG \
                                                   -fivopts \
                                                   -ffunction-sections \
                                                   -fdata-sections \
                                                   -funswitch-loops \
                                                   -fomit-frame-pointer \
                                                   -ftracer
-$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -O3 -DNDEBUG -pipe \
+$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -O3 -DNDEBUG \
                                                  -frerun-cse-after-loop \
                                                  -frename-registers \
                                                  -fivopts \
@@ -203,7 +202,6 @@ endif
 
 # More flags/options can be added here
 $(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := \
-                        -Wstrict-aliasing=2 \
                         -fgcse-after-reload 
 
 ifeq ($(SUPPRES_UNUSED_WARNING),true)

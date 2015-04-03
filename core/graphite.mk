@@ -37,6 +37,7 @@ LOCAL_DISABLE_GRAPHITE := \
 	libswscale \
 	libwebrtc_spl \
 	libsvoxpico \
+        hwcomposer.msm8974 \
 	libFraunhoferAAC
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE), $(LOCAL_MODULE))))
