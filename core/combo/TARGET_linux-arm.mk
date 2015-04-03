@@ -78,7 +78,7 @@ $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS := -O3 -DNDEBUG -pipe \
                                              -fdata-sections \
                                              -frename-registers \
                                              -ftracer
-$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb -Os -DNDEBUG -pipe \
+$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb -O3 -DNDEBUG -pipe \
                                                -fomit-frame-pointer \
                                                -fno-tree-vectorize \
                                                -fno-inline-functions \
@@ -179,7 +179,7 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden \
                                                   -funswitch-loops \
                                                   -fomit-frame-pointer \
                                                   -ftracer
-$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -O3 -DNDEBUG -pipe -g \
+$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -O3 -DNDEBUG -pipe \
                                                  -frerun-cse-after-loop \
                                                  -frename-registers \
                                                  -fivopts \
@@ -190,7 +190,7 @@ $(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -O3 -DNDEBUG -pipe -g \
                                                  -ftracer
 else
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden
-$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -DNDEBUG -g -fgcse-after-reload -frerun-cse-after-loop -frename-registers
+$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -DNDEBUG -fgcse-after-reload -frerun-cse-after-loop -frename-registers
 endif
 
 ifeq ($(SUPPRES_UNUSED_WARNING),true)

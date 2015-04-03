@@ -47,6 +47,8 @@ CLANG_CONFIG_EXTRA_CPPFLAGS :=
 endif
 CLANG_CONFIG_EXTRA_LDFLAGS :=
 
+CLANG_CONFIG_EXTRA_LDFLAGS += -Wl,--sort-common
+
 CLANG_CONFIG_EXTRA_CFLAGS += \
   -D__compiler_offsetof=__builtin_offsetof
 

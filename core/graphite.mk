@@ -36,7 +36,8 @@ LOCAL_DISABLE_GRAPHITE := \
 	libavcodec \
 	libswscale \
 	libwebrtc_spl \
-	libFraunhoferAAC
+	libFraunhoferAAC \
+        hwcomposer.msm8974
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE), $(LOCAL_MODULE))))
 ifdef LOCAL_CONLYFLAGS
