@@ -126,7 +126,7 @@ endif
 
 ifeq ($(strip $(USE_O3_OPTIMIZATIONS)),true)
 ifndef LOCAL_IS_HOST_MODULE
-  include $(BUILD_SYSTEM)/O3.mk
+  include $(BUILD_SYSTEM)/o3.mk
 endif
 endif
 
@@ -142,6 +142,14 @@ ifeq ($(GRAPHITE_OPTS),true)
 ifndef LOCAL_IS_HOST_MODULE
 ifeq ($(LOCAL_CLANG),)
 include $(BUILD_SYSTEM)/graphite.mk
+endif
+endif
+endif
+
+ifeq ($(ENABLE_LTO),true)
+ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
+ifneq ($(strip $(LOCAL_CLANG)),true)
+include $(BUILD_SYSTEM)/lto.mk
 endif
 endif
 endif

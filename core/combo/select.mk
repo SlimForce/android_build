@@ -75,7 +75,7 @@ $(combo_var_prefix)GLOBAL_CPPFLAGS := -O3 -DNDEBUG -pipe \
 $(combo_var_prefix)GLOBAL_LDFLAGS := -Wl,-O1 -Wl,--as-needed -Wl,--relax -Wl,--sort-common -Wl,--gc-sections
 else
  $(combo_var_prefix)GLOBAL_CFLAGS := -fno-exceptions -Wno-multichar
- $(combo_var_prefix)RELEASE_CFLAGS := -O2 -g
+ $(combo_var_prefix)RELEASE_CFLAGS := -O2
  $(combo_var_prefix)GLOBAL_CPPFLAGS :=
  $(combo_var_prefix)GLOBAL_LDFLAGS :=
 endif
