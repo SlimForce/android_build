@@ -51,21 +51,21 @@ $(combo_var_prefix)HAVE_KERNEL_MODULES := 0
 
 ifeq ($(USE_O3_OPTIMIZATIONS),true)
 $(combo_var_prefix)GLOBAL_CFLAGS := -fno-exceptions -Wno-multichar \
-                                    -O3 -DNDEBUG -pipe \
+                                    -O3 -DNDEBUG \
                                     -fivopts \
                                     -ffunction-sections \
                                     -fdata-sections \
                                     -funswitch-loops \
                                     -fomit-frame-pointer \
                                     -ftracer
-$(combo_var_prefix)RELEASE_CFLAGS := -O3 -DNDEBUG -pipe \
+$(combo_var_prefix)RELEASE_CFLAGS := -O3 -DNDEBUG \
                                      -fivopts \
                                      -ffunction-sections \
                                      -fdata-sections \
                                      -funswitch-loops \
                                      -fomit-frame-pointer \
                                      -ftracer
-$(combo_var_prefix)GLOBAL_CPPFLAGS := -O3 -DNDEBUG -pipe \
+$(combo_var_prefix)GLOBAL_CPPFLAGS := -O3 -DNDEBUG \
                                       -fivopts \
                                       -ffunction-sections \
                                       -fdata-sections \

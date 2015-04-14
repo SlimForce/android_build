@@ -26,7 +26,6 @@ LOCAL_CONLYFLAGS += -fira-loop-pressure \
 	-funsafe-loop-optimizations \
 	-funroll-loops \
 	-ftree-loop-distribution \
-	-fsection-anchors \
 	-ftree-loop-im \
 	-ftree-loop-ivcanon \
 	-ffunction-sections \
@@ -41,7 +40,6 @@ LOCAL_CONLYFLAGS := -fira-loop-pressure \
 	-funsafe-loop-optimizations \
 	-funroll-loops \
 	-ftree-loop-distribution \
-	-fsection-anchors \
 	-ftree-loop-im \
 	-ftree-loop-ivcanon \
 	-ffunction-sections \
@@ -58,7 +56,6 @@ LOCAL_CPPFLAGS += -fira-loop-pressure \
 	-funsafe-loop-optimizations \
 	-funroll-loops \
 	-ftree-loop-distribution \
-	-fsection-anchors \
 	-ftree-loop-im \
 	-ftree-loop-ivcanon \
 	-ffunction-sections \
@@ -73,7 +70,6 @@ LOCAL_CPPFLAGS := -fira-loop-pressure \
 	-funsafe-loop-optimizations \
 	-funroll-loops \
 	-ftree-loop-distribution \
-	-fsection-anchors \
 	-ftree-loop-im \
 	-ftree-loop-ivcanon \
 	-ffunction-sections \

@@ -116,11 +116,19 @@ ifeq ($(TARGET_USE_PIPE),true)
 include $(BUILD_SYSTEM)/pipe.mk
 endif
 
+ifndef LOCAL_IS_HOST_MODULE
 include $(BUILD_SYSTEM)/strict.mk
+endif
 
 ifeq ($(KRAIT_TUNINGS),true)
 ifndef LOCAL_IS_HOST_MODULE
 include $(BUILD_SYSTEM)/krait.mk
+endif
+endif
+
+ifeq ($(FFAST_MATH),true)
+ifndef LOCAL_IS_HOST_MODULE
+include $(BUILD_SYSTEM)/ffast_math.mk
 endif
 endif
 
@@ -146,12 +154,21 @@ endif
 endif
 endif
 
-ifeq ($(ENABLE_LTO),true)
+ifeq ($(TARGET_USE_PTHREAD),true)
+include $(BUILD_SYSTEM)/pthread.mk
+endif
+
+LOCAL_ALREADY_DISABLE_LTO :=true
+ifeq ($(TARGET_USE_LTO),true)
 ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
 ifneq ($(strip $(LOCAL_CLANG)),true)
 include $(BUILD_SYSTEM)/lto.mk
 endif
 endif
+endif
+
+ifeq ($(LOCAL_ALREADY_DISABLE_LTO),true)
+
 endif
 
 # The following LOCAL_ variables will be modified in this file.

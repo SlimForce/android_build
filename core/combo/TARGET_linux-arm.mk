@@ -71,7 +71,7 @@ $(combo_2nd_arch_prefix)TARGET_RANLIB := $($(combo_2nd_arch_prefix)TARGET_TOOLS_
 $(combo_2nd_arch_prefix)TARGET_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 
 ifeq ($(USE_O3_OPTIMIZATIONS),true)
-$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS := -O3 -DNDEBUG -pipe \
+$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS := -O3 -DNDEBUG \
                                              -fomit-frame-pointer \
                                              -funswitch-loops \
                                              -fno-tree-vectorize \
@@ -81,7 +81,7 @@ $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS := -O3 -DNDEBUG -pipe \
                                              -fdata-sections \
                                              -frename-registers \
                                              -ftracer
-$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb -O3 -DNDEBUG -pipe \
+$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb -O3 -DNDEBUG \
                                                -fomit-frame-pointer \
                                                -fno-tree-vectorize \
                                                -fno-inline-functions \
@@ -127,7 +127,6 @@ endif
 android_config_h := $(call select-android-config-h,linux-arm)
 
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += \
-                        -pipe \
 			-msoft-float \
 			-ffunction-sections \
 			-fdata-sections \
@@ -168,21 +167,20 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_LDFLAGS += \
 			-Wl,-z,now \
 			-Wl,--warn-shared-textrel \
 			-Wl,--fatal-warnings \
-			-Wl,--icf=safe \
 			$(arch_variant_ldflags)
 
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += -mthumb-interwork
 
 ifeq ($(USE_O3_OPTIMIZATIONS),true)
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden \
-                                                  -O3 -DNDEBUG -pipe \
+                                                  -O3 -DNDEBUG \
                                                   -fivopts \
                                                   -ffunction-sections \
                                                   -fdata-sections \
                                                   -funswitch-loops \
                                                   -fomit-frame-pointer \
                                                   -ftracer
-$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -O3 -DNDEBUG -pipe \
+$(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := -O3 -DNDEBUG \
                                                  -frerun-cse-after-loop \
                                                  -frename-registers \
                                                  -fivopts \
