@@ -32,6 +32,7 @@ PRODUCT_PACKAGES += \
     DownloadProviderUi \
     ExternalStorageProvider \
     FusedLocation \
+    phonelocation \
     InputDevices \
     KeyChain \
     Keyguard \
