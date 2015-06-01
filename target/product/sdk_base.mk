@@ -18,10 +18,7 @@ PRODUCT_PROPERTY_OVERRIDES :=
 
 PRODUCT_PACKAGES := \
 	ApiDemos \
-	CubeLiveWallpapers \
 	CustomLocale \
-	Development \
-	DevelopmentSettings \
 	Dialer \
 	EmulatorSmokeTests \
 	Fallback \
@@ -32,9 +29,7 @@ PRODUCT_PACKAGES := \
 	libwnndict \
 	libWnnEngDic \
 	libWnnJpnDic \
-	LiveWallpapersPicker \
 	Mms \
-	Music \
 	OpenWnn \
 	Protips \
 	rild \
