@@ -1791,7 +1791,7 @@ endef
 
 #TODO: update the manifest to point to the dex file
 define add-dex-to-package
-$(hide) zip -qj $@ $(dir $(PRIVATE_DEX_FILE))classes*.dex
+$(hide) zip -0qj $@ $(dir $(PRIVATE_DEX_FILE))classes*.dex
 endef
 
 # Add java resources added by the current module.
@@ -2237,6 +2237,7 @@ include $(BUILD_SYSTEM)/distdir.mk
 
 # Include any vendor specific definitions.mk file
 -include $(TOPDIR)vendor/*/build/core/definitions.mk
+-include $(TOPDIR)device/*/build/core/definitions.mk
 
 # broken:
 #	$(foreach file,$^,$(if $(findstring,.a,$(suffix $file)),-l$(file),$(file)))
