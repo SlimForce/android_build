@@ -177,14 +177,7 @@ endif
 endif
 
 ifneq ($(USE_CCACHE),)
-    ifeq ($(USE_SYSTEM_CCACHE),)
-        ccache :=
-    else
-        ccache := $(shell which ccache)
-    endif
-    ifeq ($(ccache),)
-        ccache := $(ANDROID_BUILD_TOP)/prebuilts/misc/$(HOST_PREBUILT_TAG)/ccache/ccache
-    endif
+    ccache := $(ANDROID_BUILD_TOP)/prebuilts/misc/$(HOST_PREBUILT_TAG)/ccache/ccache
     # Check that the executable is here.
     ccache := $(strip $(wildcard $(ccache)))
 endif

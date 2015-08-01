@@ -106,25 +106,22 @@ ifneq ($(USE_CCACHE),)
   # See http://petereisentraut.blogspot.com/2011/09/ccache-and-clang-part-2.html
   export CCACHE_CPP2 := true
 
-  # It has been shown that ccache 3.x using direct mode can be several times
-  # faster than using the current ccache 2.4 that is used by default
-  # use the system ccache if asked to, else default to the one in prebuilts
-
-  ifeq ($(USE_SYSTEM_CCACHE),)
-    ccache :=
-  else
-    ccache := $(shell which ccache)
+  CCACHE_HOST_TAG := $(HOST_PREBUILT_TAG)
+  # If we are cross-compiling Windows binaries on Linux
+  # then use the linux ccache binary instead.
+  ifeq ($(HOST_OS)-$(BUILD_OS),windows-linux)
+    CCACHE_HOST_TAG := linux-$(HOST_PREBUILT_ARCH)
   endif
 
-  ifeq ($(ccache),)
-    CCACHE_HOST_TAG := $(HOST_PREBUILT_TAG)
-    # If we are cross-compiling Windows binaries on Linux
-    # then use the linux ccache binary instead.
-    ifeq ($(HOST_OS)-$(BUILD_OS),windows-linux)
-      CCACHE_HOST_TAG := linux-$(HOST_PREBUILT_ARCH)
-    endif
+  # Check if there is a ccache binary provided by the system
+  # If there is, use it instead of prebuilt binary
+  ccache_version := $(shell ccache --version 2>/dev/null)
+  ifdef ccache_version
+    ccache := $(shell which ccache)
+  else
     ccache := prebuilts/misc/$(CCACHE_HOST_TAG)/ccache/ccache
   endif
+
   # Check that the executable is here.
   ccache := $(strip $(wildcard $(ccache)))
   ifdef ccache
