@@ -1708,6 +1708,8 @@ ifeq ($(BLOCK_BASED_OTA),true)
     $(INTERNAL_OTA_PACKAGE_TARGET): block_based := --block
 endif
 
+BOOT_ZIP_FROM_IMAGE_SCRIPT := ./build/tools/releasetools/boot_flash_from_image
+
 $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 	@echo "$(OTA_FROM_TARGET_SCRIPT)" > $(PRODUCT_OUT)/ota_script_path
 	@echo "$(override_device)" > $(PRODUCT_OUT)/ota_override_device
@@ -1725,7 +1727,7 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 
 SLIM_TARGET_PACKAGE := $(PRODUCT_OUT)/$(SLIM_MOD_VERSION).zip
 
-.PHONY: otapackage bacon
+.PHONY: otapackage bacon bootzip
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(SLIM_TARGET_PACKAGE)
@@ -1733,6 +1735,12 @@ ifdef FINISHER_SCRIPT
 	@echo -e ${CL_YLW}"Running finisher..."${CL_RST}
 	$(hide) $(FINISHER_SCRIPT) $@
 endif
+bootzip: bootimage
+	   $(BOOT_ZIP_FROM_IMAGE_SCRIPT) \
+	   $(recovery_fstab) \
+	   $(OUT) \
+	   $(TARGET_DEVICE) \
+	   $(BOOT_ZIP_OUT_FILE)
 
 # -----------------------------------------------------------------
 # The factory package
